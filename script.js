@@ -2,10 +2,14 @@
 
 import { getAllEpisodes } from "./episodes.js";
 
+let allEpisodes = [];
+
+
 function setup() {
   
-  const allEpisodes = getAllEpisodes();
-  displayEpisodes(allEpisodes);
+   allEpisodes = getAllEpisodes();
+  setupSearch();
+  displayEpisodes(allEpisodes);;
 }
 
 // Pads a number with a leading zero if it's a single digit.
@@ -21,6 +25,24 @@ function getEpisodeCode(season, episode) {
   const paddedEpisode = zeroPad(episode);
   return `S${paddedSeason}E${paddedEpisode}`;
 }
+//Search bar function
+function setupSearch() {
+  const searchInput = document.getElementById("search-input");
+
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    const filteredEpisodes = allEpisodes.filter((episode) => {
+      return (
+        episode.name.toLowerCase().includes(searchTerm) ||
+        episode.summary.toLowerCase().includes(searchTerm)
+      );
+    });
+
+    displayEpisodes(filteredEpisodes);
+  });
+}
+
 
 // Display all episodes in the given list on the page.
 
@@ -37,6 +59,7 @@ function displayEpisodes(episodeList) {
   const episodesContainer = document.createElement('section');
   episodesContainer.id = 'episodes-container'; 
   rootElem.appendChild(episodesContainer);
+
 
   // 2. Loop through each episode and display its information
   episodeList.forEach(episode => {
@@ -55,6 +78,7 @@ function displayEpisodes(episodeList) {
     titleLink.textContent = `${episode.name} - ${code}`;
     title.appendChild(titleLink);
     episodeDiv.appendChild(title);
+  
 
     // 2.4. Display image 
     if (episode.image && episode.image.medium) {
@@ -72,8 +96,9 @@ function displayEpisodes(episodeList) {
     // Append the individual episode to the container
     episodesContainer.appendChild(episodeDiv);
   });
-  
- }
+}
+
+ 
 
 window.onload = setup;
 
