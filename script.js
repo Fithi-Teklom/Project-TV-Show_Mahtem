@@ -5,7 +5,7 @@ import { getAllEpisodes } from "./episodes.js";
 function setup() {
   
   const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  displayEpisodes(allEpisodes);
 }
 
 // Pads a number with a leading zero if it's a single digit.
@@ -24,7 +24,7 @@ function getEpisodeCode(season, episode) {
 
 // Display all episodes in the given list on the page.
 
-function makePageForEpisodes(episodeList) {
+function displayEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
 
   // 1. Clear initial content and add a simple header
