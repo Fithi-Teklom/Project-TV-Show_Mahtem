@@ -2,7 +2,7 @@
 // import { getAllEpisodes } from "./episodes.js";
 
 
-// Level-300: TV Show episodes using API
+// Level-300: TV Show episodes using API after deleting episode.js
 
 let allEpisodes = [];
 const API_URL = "https://api.tvmaze.com/shows/82/episodes";
