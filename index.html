@@ -16,25 +16,29 @@
       style="margin: 10px 0; font-weight: bold"
     ></div>
 
+    
+  <div class="controls">
     <!--Select show bar--> 
-    <label for="show-select">Select a show:</label>
-    <select id="show-select"></select>
-
+    <div class="control-row">
+      <label for="show-select">Select a show:</label>
+      <select id="show-select"></select>
+    </div>
    
 
     <!-- Search bar -->
-    <div class="search-container">
+    <div class="control-row">
       <label for="search-input">Search :</label>
       <input id="search-input" type="text" placeholder="Search ..." />
     </div>
 
     <!-- Select drop down -->
-    <div class="episode-selector">
+    <div class="control-row">
       <label for="episode-select">Jump to episode:</label>
       <select id="episode-select">
         <option value="">All episodes</option>
       </select>
     </div>
+  </div>
 
     <!-- Episodes will be appended here -->
     <div id="root"></div>
