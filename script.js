@@ -1,7 +1,7 @@
 // You can edit ALL of the code here
 // import { getAllEpisodes } from "./episodes.js";
 
-// Level-300: TV Show episodes using API after deleting episode.js
+// level-400
 
 let allEpisodes = [];
 let allShows = [];
@@ -72,7 +72,7 @@ function clearStatus() {
   status.textContent = "";
 }
 
-function showError(message) {
+function showError(message) { 
   const status = document.getElementById("status");
   status.textContent = `Error loading shows: ${message}`;
   const root = document.getElementById("root");
@@ -105,12 +105,15 @@ function populateShowSelect(shows) {
     select.appendChild(option);
   });
 
-  select.addEventListener("change", handleShowChange);
+  select.onchange = handleShowChange;
+
 }
 
 function populateEpisodeSelect(episodeList) {
   const select = document.getElementById("episode-select");
   select.innerHTML = '<option value="">All episodes</option>';
+  select.value = "";
+
 
   episodeList.forEach((ep) => {
     const code = getEpisodeCode(ep.season, ep.number);
@@ -120,7 +123,8 @@ function populateEpisodeSelect(episodeList) {
     select.appendChild(option);
   });
 
-  select.onchange = handleShowChange;
+  select.onchange = handleEpisodeSelect;
+
 
 }
 
@@ -160,16 +164,21 @@ async function handleShowChange(event) {
 function handleEpisodeSelect(event) {
   const selectedCode = event.target.value;
 
-  if (!selectedCode) {
+  // If user chooses "All episodes"
+  if (selectedCode === "") {
     displayEpisodes(allEpisodes);
     return;
   }
 
-  const filtered = allEpisodes.filter(
-    (ep) => getEpisodeCode(ep.season, ep.number) === selectedCode
-  );
-  displayEpisodes(filtered);
+  // Find the one episode that matches the code
+  const chosenEpisode = allEpisodes.filter(ep => {
+    const code = getEpisodeCode(ep.season, ep.number);
+    return code === selectedCode;
+  });
+
+  displayEpisodes(chosenEpisode);
 }
+
 
 //UI refresher helper
 
